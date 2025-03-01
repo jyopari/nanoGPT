@@ -1,0 +1,16 @@
+{"time":"2025-02-09T15:22:46.395684927-05:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-02-09T15:22:46.395699917-05:00","level":"INFO","msg":"created symlink","path":"/data/pulkitag/models/jyop/code/nanoGPT/wandb/run-20250209_152246-od1mt9rw/logs/debug-core.log"}
+{"time":"2025-02-09T15:22:46.751351443-05:00","level":"INFO","msg":"created new stream","id":"od1mt9rw"}
+{"time":"2025-02-09T15:22:46.751383493-05:00","level":"INFO","msg":"stream: started","id":"od1mt9rw"}
+{"time":"2025-02-09T15:22:46.756758135-05:00","level":"INFO","msg":"handler: started","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:22:46.784758995-05:00","level":"INFO","msg":"sender: started","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:22:46.784818535-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:22:46.986765443-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-09T15:23:21.579800259-05:00","level":"INFO","msg":"stream: closing","id":"od1mt9rw"}
+{"time":"2025-02-09T15:23:21.579974459-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-09T15:23:21.581103187-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-09T15:23:23.029152269-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-09T15:23:23.169532176-05:00","level":"INFO","msg":"handler: closed","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:23:23.169582796-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:23:23.169803816-05:00","level":"INFO","msg":"sender: closed","stream_id":"od1mt9rw"}
+{"time":"2025-02-09T15:23:23.170784425-05:00","level":"INFO","msg":"stream: closed","id":"od1mt9rw"}

@@ -1,0 +1,122 @@
+step 0: train loss 4.1127, val loss 4.0153
+Traceback (most recent call last):
+  File "/data/pulkitag/models/jyop/code/nanoGPT/train.py", line 304, in <module>
+    logits, loss = model(X, Y)
+                   ^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/eval_frame.py", line 465, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1269, in __call__
+    return self._torchdynamo_orig_callable(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 1064, in __call__
+    result = self._inner_convert(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 526, in __call__
+    return _compile(
+           ^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 924, in _compile
+    guarded_code = compile_inner(code, one_graph, hooks, transform)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 666, in compile_inner
+    return _compile_inner(code, one_graph, hooks, transform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_utils_internal.py", line 87, in wrapper_function
+    return function(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 699, in _compile_inner
+    out_code = transform_code_object(code, transform)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/bytecode_transformation.py", line 1322, in transform_code_object
+    transformations(instructions, code_options)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 219, in _fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/convert_frame.py", line 634, in transform
+    tracer.run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 2796, in run
+    super().run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 983, in run
+    while self.step():
+          ^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 895, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 2987, in RETURN_VALUE
+    self._return(inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/symbolic_convert.py", line 2972, in _return
+    self.output.compile_subgraph(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/output_graph.py", line 1142, in compile_subgraph
+    self.compile_and_call_fx_graph(tx, pass2.graph_output_vars(), root)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/output_graph.py", line 1369, in compile_and_call_fx_graph
+    compiled_fn = self.call_user_compiler(gm)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/output_graph.py", line 1416, in call_user_compiler
+    return self._call_user_compiler(gm)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/output_graph.py", line 1446, in _call_user_compiler
+    compiled_fn = compiler_fn(gm, self.example_inputs())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/repro/after_dynamo.py", line 129, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/__init__.py", line 2234, in __call__
+    return compile_fx(model_, inputs_, config_patches=self.config)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1521, in compile_fx
+    return aot_autograd(
+           ^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_dynamo/backends/common.py", line 72, in __call__
+    cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/aot_autograd.py", line 1071, in aot_module_simplified
+    compiled_fn = dispatch_and_compile()
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/aot_autograd.py", line 1056, in dispatch_and_compile
+    compiled_fn, _ = create_aot_dispatcher_function(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/aot_autograd.py", line 522, in create_aot_dispatcher_function
+    return _create_aot_dispatcher_function(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/aot_autograd.py", line 759, in _create_aot_dispatcher_function
+    compiled_fn, fw_metadata = compiler_fn(
+                               ^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 382, in aot_dispatch_autograd
+    fw_module, bw_module = aot_config.partition_fn(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_inductor/compile_fx.py", line 1449, in partition_fn
+    return min_cut_rematerialization_partition(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/partitioners.py", line 1858, in min_cut_rematerialization_partition
+    fw_module, bw_module = _extract_fwd_bwd_modules(
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/partitioners.py", line 302, in _extract_fwd_bwd_modules
+    bwd_graph = _extract_graph_with_inputs_outputs(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/_functorch/partitioners.py", line 201, in _extract_graph_with_inputs_outputs
+    env[node] = new_graph.node_copy(node, lambda x: env[x])
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/fx/graph.py", line 1357, in node_copy
+    args = map_arg(node.args, arg_transform)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/fx/node.py", line 767, in map_arg
+    return map_aggregate(a, lambda x: fn(x) if isinstance(x, Node) else x)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/fx/node.py", line 775, in map_aggregate
+    t = tuple([map_aggregate(elem, fn) for elem in a])
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data/pulkitag/models/jyop/miniforge3/envs/coconut/lib/python3.12/site-packages/torch/fx/node.py", line 769, in map_aggregate
+    @compatibility(is_backward_compatible=True)
+
+KeyboardInterrupt

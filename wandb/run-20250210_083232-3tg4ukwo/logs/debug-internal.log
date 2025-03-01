@@ -1,0 +1,16 @@
+{"time":"2025-02-10T08:32:32.250316601-05:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-02-10T08:32:32.250330441-05:00","level":"INFO","msg":"created symlink","path":"/data/pulkitag/models/jyop/code/nanoGPT/wandb/run-20250210_083232-3tg4ukwo/logs/debug-core.log"}
+{"time":"2025-02-10T08:32:32.369788861-05:00","level":"INFO","msg":"created new stream","id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:32.369812461-05:00","level":"INFO","msg":"stream: started","id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:32.373912355-05:00","level":"INFO","msg":"handler: started","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:32.373939595-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:32.374340524-05:00","level":"INFO","msg":"sender: started","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:32.565224526-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-10T08:32:58.409146923-05:00","level":"INFO","msg":"stream: closing","id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:58.409269513-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-10T08:32:58.409928532-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-10T08:32:59.864592882-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-10T08:32:59.989602053-05:00","level":"INFO","msg":"handler: closed","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:59.989643573-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:59.989893433-05:00","level":"INFO","msg":"sender: closed","stream_id":"3tg4ukwo"}
+{"time":"2025-02-10T08:32:59.990748012-05:00","level":"INFO","msg":"stream: closed","id":"3tg4ukwo"}

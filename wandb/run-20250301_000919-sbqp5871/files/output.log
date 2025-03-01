@@ -1,0 +1,90 @@
+step 0: train loss 2.3696, val loss 2.4116
+iter 0: loss 2.6772, time 33285.84ms, mfu -100.00%
+Traceback (most recent call last):
+  File "/data/pulkitag/models/jyop/code/nanoGPT/train.py", line 308, in <module>
+    logits, loss = model(X, Y)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 465, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/code/nanoGPT/model.py", line 232, in forward
+    def forward(self, idx, targets=None):
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1100, in forward
+    return compiled_fn(full_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 308, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 124, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 98, in g
+    return f(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 1525, in forward
+    fw_outs = call_func_at_runtime_with_args(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 124, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 488, in wrapper
+    return compiled_fn(runtime_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 667, in inner_fn
+    outs = compiled_fn(args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/codecache.py", line 1478, in __call__
+    return self.current_callable(inputs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/utils.py", line 1977, in run
+    return model(new_inputs)
+  File "/tmp/torchinductor_jyop/43/c43v3elepapwzl4gbh4gzjrhg3yv6tw5mbdtffb6nks7z4qgmmcx.py", line 1661, in call
+    buf261 = torch.ops.aten._scaled_dot_product_flash_attention.default(reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 0), reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 768), reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 1536), 0.0, True, scale=0.125)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_ops.py", line 716, in __call__
+    return self._op(*args, **kwargs)
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/data/pulkitag/models/jyop/code/nanoGPT/train.py", line 308, in <module>
+    logits, loss = model(X, Y)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 465, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/code/nanoGPT/model.py", line 232, in forward
+    def forward(self, idx, targets=None):
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1100, in forward
+    return compiled_fn(full_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 308, in runtime_wrapper
+    all_outs = call_func_at_runtime_with_args(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 124, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 98, in g
+    return f(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/autograd/function.py", line 575, in apply
+    return super().apply(*args, **kwargs)  # type: ignore[misc]
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 1525, in forward
+    fw_outs = call_func_at_runtime_with_args(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/utils.py", line 124, in call_func_at_runtime_with_args
+    out = normalize_as_list(f(args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 488, in wrapper
+    return compiled_fn(runtime_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/runtime_wrappers.py", line 667, in inner_fn
+    outs = compiled_fn(args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/codecache.py", line 1478, in __call__
+    return self.current_callable(inputs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/utils.py", line 1977, in run
+    return model(new_inputs)
+  File "/tmp/torchinductor_jyop/43/c43v3elepapwzl4gbh4gzjrhg3yv6tw5mbdtffb6nks7z4qgmmcx.py", line 1661, in call
+    buf261 = torch.ops.aten._scaled_dot_product_flash_attention.default(reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 0), reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 768), reinterpret_tensor(buf260, (1, 12, 1024, 64), (2359296, 64, 2304, 1), 1536), 0.0, True, scale=0.125)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_ops.py", line 716, in __call__
+    return self._op(*args, **kwargs)
+KeyboardInterrupt

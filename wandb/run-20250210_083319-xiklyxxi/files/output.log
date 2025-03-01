@@ -1,0 +1,30 @@
+step 0: train loss 4.1218, val loss 3.9747
+iter 0: loss 3.9630, time 10602.77ms, mfu -100.00%
+iter 1: loss 3.9437, time 314.92ms, mfu -100.00%
+iter 2: loss 3.8078, time 305.66ms, mfu -100.00%
+iter 3: loss 4.0436, time 306.28ms, mfu -100.00%
+iter 4: loss 3.5505, time 302.42ms, mfu -100.00%
+step 5: train loss 3.6541, val loss 3.4604
+skipping saving checkpoint to out-shakespeare
+iter 5: loss 3.7488, time 607.03ms, mfu 14.80%
+iter 6: loss 3.6388, time 303.93ms, mfu 16.27%
+iter 7: loss 3.6869, time 301.69ms, mfu 17.62%
+iter 8: loss 3.7910, time 307.25ms, mfu 18.78%
+iter 9: loss 3.7636, time 301.92ms, mfu 19.88%
+step 10: train loss 3.5355, val loss 3.4222
+skipping saving checkpoint to out-shakespeare
+iter 10: loss 3.0965, time 599.71ms, mfu 19.39%
+iter 11: loss 3.4942, time 308.96ms, mfu 20.36%
+iter 12: loss 3.3418, time 303.36ms, mfu 21.28%
+iter 13: loss 3.2727, time 313.72ms, mfu 22.02%
+iter 14: loss 3.3272, time 302.23ms, mfu 22.79%
+step 15: train loss 3.5276, val loss 3.4201
+skipping saving checkpoint to out-shakespeare
+iter 15: loss 3.2269, time 602.03ms, mfu 22.00%
+iter 16: loss 3.5863, time 300.32ms, mfu 22.79%
+iter 17: loss 3.5258, time 308.62ms, mfu 23.42%
+iter 18: loss 3.7307, time 301.84ms, mfu 24.05%
+iter 19: loss 3.7656, time 306.71ms, mfu 24.58%
+step 20: train loss 3.5106, val loss 3.3228
+skipping saving checkpoint to out-shakespeare
+iter 20: loss 3.0344, time 611.03ms, mfu 23.59%

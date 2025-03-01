@@ -1,0 +1,16 @@
+{"time":"2025-02-10T09:16:43.23595279-05:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-02-10T09:16:43.23596553-05:00","level":"INFO","msg":"created symlink","path":"/data/pulkitag/models/jyop/code/nanoGPT/wandb/run-20250210_091643-lle9li2h/logs/debug-core.log"}
+{"time":"2025-02-10T09:16:43.356366978-05:00","level":"INFO","msg":"created new stream","id":"lle9li2h"}
+{"time":"2025-02-10T09:16:43.356426828-05:00","level":"INFO","msg":"stream: started","id":"lle9li2h"}
+{"time":"2025-02-10T09:16:43.358856835-05:00","level":"INFO","msg":"handler: started","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:16:43.358910824-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:16:43.359117484-05:00","level":"INFO","msg":"sender: started","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:16:43.57148823-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-10T09:17:10.868970069-05:00","level":"INFO","msg":"stream: closing","id":"lle9li2h"}
+{"time":"2025-02-10T09:17:10.869088969-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-10T09:17:10.869878838-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-10T09:17:11.389413846-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-10T09:17:17.802401512-05:00","level":"INFO","msg":"handler: closed","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:17:17.802456081-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:17:17.802678591-05:00","level":"INFO","msg":"sender: closed","stream_id":"lle9li2h"}
+{"time":"2025-02-10T09:17:17.80344993-05:00","level":"INFO","msg":"stream: closed","id":"lle9li2h"}

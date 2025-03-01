@@ -1,0 +1,265 @@
+step 0: train loss 2.3375, val loss 2.3745
+Traceback (most recent call last):
+  File "/data/pulkitag/models/jyop/code/nanoGPT/train.py", line 308, in <module>
+    logits, loss = model(X, Y)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 465, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 1269, in __call__
+    return self._torchdynamo_orig_callable(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 1064, in __call__
+    result = self._inner_convert(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 526, in __call__
+    return _compile(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 924, in _compile
+    guarded_code = compile_inner(code, one_graph, hooks, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 666, in compile_inner
+    return _compile_inner(code, one_graph, hooks, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_utils_internal.py", line 87, in wrapper_function
+    return function(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 699, in _compile_inner
+    out_code = transform_code_object(code, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/bytecode_transformation.py", line 1322, in transform_code_object
+    transformations(instructions, code_options)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 219, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 634, in transform
+    tracer.run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2796, in run
+    super().run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 983, in run
+    while self.step():
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 895, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2987, in RETURN_VALUE
+    self._return(inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2972, in _return
+    self.output.compile_subgraph(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1142, in compile_subgraph
+    self.compile_and_call_fx_graph(tx, pass2.graph_output_vars(), root)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1369, in compile_and_call_fx_graph
+    compiled_fn = self.call_user_compiler(gm)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1416, in call_user_compiler
+    return self._call_user_compiler(gm)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1446, in _call_user_compiler
+    compiled_fn = compiler_fn(gm, self.example_inputs())
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/repro/after_dynamo.py", line 129, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/__init__.py", line 2234, in __call__
+    return compile_fx(model_, inputs_, config_patches=self.config)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 1521, in compile_fx
+    return aot_autograd(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/backends/common.py", line 72, in __call__
+    cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1071, in aot_module_simplified
+    compiled_fn = dispatch_and_compile()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1056, in dispatch_and_compile
+    compiled_fn, _ = create_aot_dispatcher_function(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 522, in create_aot_dispatcher_function
+    return _create_aot_dispatcher_function(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 759, in _create_aot_dispatcher_function
+    compiled_fn, fw_metadata = compiler_fn(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 333, in aot_dispatch_autograd
+    fx_g, joint_inputs, maybe_subclass_meta = aot_dispatch_autograd_graph(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 294, in aot_dispatch_autograd_graph
+    fx_g = _create_graph(joint_fn_to_trace, updated_joint_inputs, aot_config=aot_config)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 54, in _create_graph
+    fx_g = make_fx(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2110, in wrapped
+    return make_fx_tracer.trace(f, *args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2048, in trace
+    return self._trace_inner(f, *args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2034, in _trace_inner
+    t = dispatch_trace(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_compile.py", line 32, in inner
+    return disable_fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1127, in dispatch_trace
+    graph = tracer.trace(root, concrete_args)  # type: ignore[arg-type]
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/_symbolic_trace.py", line 823, in trace
+    (self.create_arg(fn(*args)),),
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/_symbolic_trace.py", line 676, in flatten_fn
+    tree_out = root_fn(*tree_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1182, in wrapped
+    out = f(*tensors)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 693, in inner_fn
+    outs = fn(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 644, in joint_helper
+    return _functionalized_f_helper(primals, tangents)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 413, in _functionalized_f_helper
+    f_outs = fn(*f_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 280, in inner_fn_with_anomaly
+    return inner_fn(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 194, in inner_fn
+    outs, tangent_mask = fn(*primals)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 115, in inner_fn
+    outs = fn(*args_maybe_cloned)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 859, in functional_call
+    out = PropagateUnbackedSymInts(mod).run(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 146, in run
+    self.env[node] = self.run_node(node)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/symbolic_shapes.py", line 5498, in run_node
+    result = super().run_node(n)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 203, in run_node
+    return getattr(self, n.op)(n.target, args, kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 275, in call_function
+    return target(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1230, in __torch_function__
+    return func(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 546, in __torch_dispatch__
+    outs_wrapped = pytree.tree_map_only(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1136, in tree_map_only
+    return tree_map(map_only(__type_or_types_or_pred)(func), tree, is_leaf=is_leaf)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 964, in tree_map
+    return treespec.unflatten(map(func, *flat_args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 803, in unflatten
+    leaves = list(leaves)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1082, in wrapped
+    return func(x)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 454, in wrap
+    return FunctionalTensor(x, self)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 141, in __new__
+    out = torch.Tensor._make_wrapper_subclass(  # type: ignore[arg-type, attr-defined]
+KeyboardInterrupt
+Traceback (most recent call last):
+  File "/data/pulkitag/models/jyop/code/nanoGPT/train.py", line 308, in <module>
+    logits, loss = model(X, Y)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 465, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 1269, in __call__
+    return self._torchdynamo_orig_callable(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 1064, in __call__
+    result = self._inner_convert(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 526, in __call__
+    return _compile(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 924, in _compile
+    guarded_code = compile_inner(code, one_graph, hooks, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 666, in compile_inner
+    return _compile_inner(code, one_graph, hooks, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_utils_internal.py", line 87, in wrapper_function
+    return function(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 699, in _compile_inner
+    out_code = transform_code_object(code, transform)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/bytecode_transformation.py", line 1322, in transform_code_object
+    transformations(instructions, code_options)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 219, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/convert_frame.py", line 634, in transform
+    tracer.run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2796, in run
+    super().run()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 983, in run
+    while self.step():
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 895, in step
+    self.dispatch_table[inst.opcode](self, inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2987, in RETURN_VALUE
+    self._return(inst)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/symbolic_convert.py", line 2972, in _return
+    self.output.compile_subgraph(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1142, in compile_subgraph
+    self.compile_and_call_fx_graph(tx, pass2.graph_output_vars(), root)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1369, in compile_and_call_fx_graph
+    compiled_fn = self.call_user_compiler(gm)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1416, in call_user_compiler
+    return self._call_user_compiler(gm)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/output_graph.py", line 1446, in _call_user_compiler
+    compiled_fn = compiler_fn(gm, self.example_inputs())
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/repro/after_dynamo.py", line 129, in __call__
+    compiled_gm = compiler_fn(gm, example_inputs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/__init__.py", line 2234, in __call__
+    return compile_fx(model_, inputs_, config_patches=self.config)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 1521, in compile_fx
+    return aot_autograd(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/backends/common.py", line 72, in __call__
+    cg = aot_module_simplified(gm, example_inputs, **self.kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1071, in aot_module_simplified
+    compiled_fn = dispatch_and_compile()
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 1056, in dispatch_and_compile
+    compiled_fn, _ = create_aot_dispatcher_function(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 522, in create_aot_dispatcher_function
+    return _create_aot_dispatcher_function(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/aot_autograd.py", line 759, in _create_aot_dispatcher_function
+    compiled_fn, fw_metadata = compiler_fn(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/jit_compile_runtime_wrappers.py", line 333, in aot_dispatch_autograd
+    fx_g, joint_inputs, maybe_subclass_meta = aot_dispatch_autograd_graph(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 294, in aot_dispatch_autograd_graph
+    fx_g = _create_graph(joint_fn_to_trace, updated_joint_inputs, aot_config=aot_config)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/dispatch_and_compile_graph.py", line 54, in _create_graph
+    fx_g = make_fx(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2110, in wrapped
+    return make_fx_tracer.trace(f, *args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2048, in trace
+    return self._trace_inner(f, *args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 2034, in _trace_inner
+    t = dispatch_trace(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_compile.py", line 32, in inner
+    return disable_fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1127, in dispatch_trace
+    graph = tracer.trace(root, concrete_args)  # type: ignore[arg-type]
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 632, in _fn
+    return fn(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/_symbolic_trace.py", line 823, in trace
+    (self.create_arg(fn(*args)),),
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/_symbolic_trace.py", line 676, in flatten_fn
+    tree_out = root_fn(*tree_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1182, in wrapped
+    out = f(*tensors)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 693, in inner_fn
+    outs = fn(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 644, in joint_helper
+    return _functionalized_f_helper(primals, tangents)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 413, in _functionalized_f_helper
+    f_outs = fn(*f_args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 280, in inner_fn_with_anomaly
+    return inner_fn(*args)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 194, in inner_fn
+    outs, tangent_mask = fn(*primals)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 115, in inner_fn
+    outs = fn(*args_maybe_cloned)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_functorch/_aot_autograd/traced_function_transforms.py", line 859, in functional_call
+    out = PropagateUnbackedSymInts(mod).run(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 146, in run
+    self.env[node] = self.run_node(node)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/symbolic_shapes.py", line 5498, in run_node
+    result = super().run_node(n)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 203, in run_node
+    return getattr(self, n.op)(n.target, args, kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/interpreter.py", line 275, in call_function
+    return target(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/fx/experimental/proxy_tensor.py", line 1230, in __torch_function__
+    return func(*args, **kwargs)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 546, in __torch_dispatch__
+    outs_wrapped = pytree.tree_map_only(
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1136, in tree_map_only
+    return tree_map(map_only(__type_or_types_or_pred)(func), tree, is_leaf=is_leaf)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 964, in tree_map
+    return treespec.unflatten(map(func, *flat_args))
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 803, in unflatten
+    leaves = list(leaves)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/utils/_pytree.py", line 1082, in wrapped
+    return func(x)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 454, in wrap
+    return FunctionalTensor(x, self)
+  File "/data/pulkitag/models/jyop/miniforge3/envs/trl/lib/python3.10/site-packages/torch/_subclasses/functional_tensor.py", line 141, in __new__
+    out = torch.Tensor._make_wrapper_subclass(  # type: ignore[arg-type, attr-defined]
+KeyboardInterrupt

@@ -1,0 +1,29 @@
+step 0: train loss 2.3696, val loss 2.4116
+iter 0: loss 2.6772, time 10114.22ms, mfu -100.00%
+iter 1: loss 2.0677, time 304.46ms, mfu -100.00%
+iter 2: loss 2.3032, time 300.54ms, mfu -100.00%
+iter 3: loss 2.4818, time 299.63ms, mfu -100.00%
+iter 4: loss 2.4416, time 300.68ms, mfu -100.00%
+step 5: train loss 2.1601, val loss 2.1756
+skipping saving checkpoint to out-tinystories
+iter 5: loss 2.4939, time 602.08ms, mfu 14.92%
+iter 6: loss 2.1218, time 302.04ms, mfu 16.40%
+iter 7: loss 2.3204, time 298.06ms, mfu 17.77%
+iter 8: loss 2.0455, time 299.38ms, mfu 19.00%
+iter 9: loss 1.9577, time 297.65ms, mfu 20.11%
+step 10: train loss 2.0882, val loss 2.1012
+skipping saving checkpoint to out-tinystories
+iter 10: loss 2.2098, time 599.28ms, mfu 19.60%
+iter 11: loss 2.2266, time 298.53ms, mfu 20.65%
+iter 12: loss 1.7497, time 299.76ms, mfu 21.58%
+iter 13: loss 1.9193, time 299.67ms, mfu 22.42%
+iter 14: loss 1.8861, time 298.53ms, mfu 23.19%
+step 15: train loss 1.9970, val loss 2.0145
+skipping saving checkpoint to out-tinystories
+iter 15: loss 2.2410, time 603.39ms, mfu 22.36%
+iter 16: loss 2.1293, time 301.07ms, mfu 23.10%
+iter 17: loss 2.3267, time 302.48ms, mfu 23.76%
+iter 18: loss 2.2256, time 301.17ms, mfu 24.37%
+iter 19: loss 1.8114, time 302.91ms, mfu 24.90%
+step 20: train loss 1.9990, val loss 2.0428
+iter 20: loss 1.9381, time 601.42ms, mfu 23.90%

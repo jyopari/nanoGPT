@@ -33,6 +33,23 @@ class CausalSelfAttention(nn.Module):
         assert config.n_embd % config.n_head == 0
         # key, query, value projections for all heads, but in a batch
         self.c_attn = nn.Linear(config.n_embd, 3 * config.n_embd, bias=config.bias)
+        
+        # Add LoRA parameters if configured
+        self.use_lora = getattr(config, 'add_lora', False)
+        if self.use_lora:
+            # LoRA rank
+            self.lora_rank = 6
+            # LoRA scaling factor
+            self.lora_alpha = 1.0
+            self.scaling = self.lora_alpha / self.lora_rank
+            
+            # Initialize A and B matrices for LoRA
+            self.lora_A = nn.Parameter(torch.zeros(config.n_embd, self.lora_rank))
+            self.lora_B = nn.Parameter(torch.zeros(self.lora_rank, 3 * config.n_embd))
+            # Initialize with small random values
+            nn.init.kaiming_uniform_(self.lora_A, a=math.sqrt(5))
+            nn.init.zeros_(self.lora_B)
+
         # output projection
         self.c_proj = nn.Linear(config.n_embd, config.n_embd, bias=config.bias)
         # regularization
@@ -52,8 +69,14 @@ class CausalSelfAttention(nn.Module):
     def forward(self, x):
         B, T, C = x.size() # batch size, sequence length, embedding dimensionality (n_embd)
 
-        # calculate query, key, values for all heads in batch and move head forward to be the batch dim
-        q, k, v  = self.c_attn(x).split(self.n_embd, dim=2)
+        # Apply base transformation and LoRA if enabled
+        if self.use_lora:
+            base_attn = self.c_attn(x)
+            lora_attn = (x @ self.lora_A @ self.lora_B) * self.scaling
+            attn_output = base_attn + lora_attn
+            q, k, v = attn_output.split(self.n_embd, dim=2)
+        else:
+            q, k, v = self.c_attn(x).split(self.n_embd, dim=2)
         k = k.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         q = q.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
         v = v.view(B, T, self.n_head, C // self.n_head).transpose(1, 2) # (B, nh, T, hs)
@@ -105,6 +128,31 @@ class Block(nn.Module):
         x = x + self.mlp(self.ln_2(x))
         return x
 
+class Router(nn.Module):
+    """Routes tokens to different blocks and combines their outputs using learned weights"""
+    
+    def __init__(self, config, num_experts):
+        super().__init__()
+        self.router = nn.Linear(config.n_embd, num_experts, bias=False)
+        self.num_experts = num_experts
+        
+    def forward(self, x, expert_outputs):
+        # x shape: (batch_size, seq_len, n_embd)
+        # expert_outputs: list of (batch_size, seq_len, n_embd) tensors
+        
+        # Calculate routing weights
+        routing_logits = self.router(x)  # (batch_size, seq_len, num_experts)
+        routing_logits[:, :, 0] += 4
+        # Use softmax instead of simple normalization
+        routing_weights = F.softmax(routing_logits, dim=-1)
+        
+        # Combine expert outputs
+        combined_output = torch.zeros_like(x)
+        for i in range(self.num_experts):
+            combined_output += expert_outputs[i] * routing_weights[:, :, i:i+1]
+            
+        return combined_output
+
 @dataclass
 class GPTConfig:
     block_size: int = 1024
@@ -114,6 +162,8 @@ class GPTConfig:
     n_embd: int = 768
     dropout: float = 0.0
     bias: bool = True # True: bias in Linears and LayerNorms, like GPT-2. False: a bit better and faster
+    is_moe: bool = False # Whether to use Mixture of Experts routing between layers
+    add_lora: bool = False # Whether to add LoRA to the model
 
 class GPT(nn.Module):
 
@@ -122,14 +172,26 @@ class GPT(nn.Module):
         assert config.vocab_size is not None
         assert config.block_size is not None
         self.config = config
+        
+        transformer_dict = {
+            'wte': nn.Embedding(config.vocab_size, config.n_embd),
+            'wpe': nn.Embedding(config.block_size, config.n_embd),
+            'drop': nn.Dropout(config.dropout),
+            'h': nn.ModuleList(),  # Initialize as empty ModuleList
+            'ln_f': LayerNorm(config.n_embd, bias=config.bias),
+        }
 
-        self.transformer = nn.ModuleDict(dict(
-            wte = nn.Embedding(config.vocab_size, config.n_embd),
-            wpe = nn.Embedding(config.block_size, config.n_embd),
-            drop = nn.Dropout(config.dropout),
-            h = nn.ModuleList([Block(config) for _ in range(config.n_layer)]),
-            ln_f = LayerNorm(config.n_embd, bias=config.bias),
-        ))
+        # Create blocks with LoRA only in the last layer if configured
+        for i in range(config.n_layer):
+            block_config = config
+            if i == config.n_layer - 1 and getattr(config, 'add_lora', False):
+                # Create a new config for the last layer with LoRA enabled
+                block_config = GPTConfig(**{k: v for k, v in config.__dict__.items()})
+                block_config.add_lora = True
+            transformer_dict['h'].append(Block(block_config))
+
+        self.transformer = nn.ModuleDict(transformer_dict)
+        
         self.lm_head = nn.Linear(config.n_embd, config.vocab_size, bias=False)
         # with weight tying when using torch.compile() some warnings get generated:
         # "UserWarning: functional_call was passed multiple values for tied weights.
@@ -171,14 +233,36 @@ class GPT(nn.Module):
         device = idx.device
         b, t = idx.size()
         assert t <= self.config.block_size, f"Cannot forward sequence of length {t}, block size is only {self.config.block_size}"
-        pos = torch.arange(0, t, dtype=torch.long, device=device) # shape (t)
+        pos = torch.arange(0, t, dtype=torch.long, device=device)
 
         # forward the GPT model itself
-        tok_emb = self.transformer.wte(idx) # token embeddings of shape (b, t, n_embd)
-        pos_emb = self.transformer.wpe(pos) # position embeddings of shape (t, n_embd)
+        tok_emb = self.transformer.wte(idx)
+        pos_emb = self.transformer.wpe(pos)
         x = self.transformer.drop(tok_emb + pos_emb)
-        for block in self.transformer.h:
-            x = block(x)
+        
+        if self.config.is_moe:
+            # MoE forward pass through layers
+            for layer_idx in range(self.config.n_layer):
+                # Get outputs from current block and next block (if available)
+                expert_outputs = []
+                
+                # Always add current block
+                expert_outputs.append(self.transformer.h[layer_idx](x))
+                
+                # Add next block's output if it exists
+                if layer_idx < self.config.n_layer - 1:
+                    expert_outputs.append(self.transformer.h[layer_idx + 1](x))
+                else:
+                    # For the last layer, just duplicate the current block's output
+                    expert_outputs.append(expert_outputs[0])
+                
+                # Route between the outputs
+                x = self.transformer.routers[layer_idx](x, expert_outputs)
+        else:
+            # Original forward pass
+            for block in self.transformer.h:
+                x = block(x)
+                
         x = self.transformer.ln_f(x)
 
         if targets is not None:
@@ -199,18 +283,24 @@ class GPT(nn.Module):
         assert block_size <= self.config.block_size
         self.config.block_size = block_size
         self.transformer.wpe.weight = nn.Parameter(self.transformer.wpe.weight[:block_size])
-        for block in self.transformer.h:
-            if hasattr(block.attn, 'bias'):
-                block.attn.bias = block.attn.bias[:,:,:block_size,:block_size]
+        for layer_idx in range(self.config.n_layer):
+            for i in range(self.num_experts):
+                if hasattr(self.transformer.h[layer_idx][i].attn, 'bias'):
+                    self.transformer.h[layer_idx][i].attn.bias = self.transformer.h[layer_idx][i].attn.bias[:,:,:block_size,:block_size]
 
     @classmethod
     def from_pretrained(cls, model_type, override_args=None):
         assert model_type in {'gpt2', 'gpt2-medium', 'gpt2-large', 'gpt2-xl'}
         override_args = override_args or {} # default to empty dict
         # only dropout can be overridden see more notes below
-        assert all(k == 'dropout' for k in override_args)
+        assert all(k == 'dropout' or k == 'is_moe' or k == 'add_lora' for k in override_args)
         from transformers import GPT2LMHeadModel
         print("loading weights from pretrained gpt: %s" % model_type)
+
+        # Store original is_moe value and temporarily disable it
+        original_is_moe = override_args.get('is_moe', False)
+        original_add_lora = override_args.get('add_lora', False)
+        config_override = {k: v for k, v in override_args.items() if k != 'is_moe' and k != 'add_lora'}
 
         # n_layer, n_head and n_embd are determined from model_type
         config_args = {
@@ -223,6 +313,9 @@ class GPT(nn.Module):
         config_args['vocab_size'] = 50257 # always 50257 for GPT model checkpoints
         config_args['block_size'] = 1024 # always 1024 for GPT model checkpoints
         config_args['bias'] = True # always True for GPT model checkpoints
+        config_args['is_moe'] = False  # Initially create without MoE
+        config_args['add_lora'] = False  # Initially create without LoRA    
+        
         # we can override the dropout rate, if desired
         if 'dropout' in override_args:
             print(f"overriding dropout rate to {override_args['dropout']}")
@@ -258,31 +351,96 @@ class GPT(nn.Module):
                 with torch.no_grad():
                     sd[k].copy_(sd_hf[k])
 
+        # Add MoE components if requested
+        if original_is_moe:
+            print("Adding MoE routing components...")
+            model.config.is_moe = True
+            model.transformer.routers = nn.ModuleList([
+                Router(model.config, 2) for _ in range(model.config.n_layer)
+            ])
+        
+        if original_add_lora:
+            print("Adding LoRA components to final layer...")
+            model.config.add_lora = True
+            
+            # Store the weights of the last layer
+            last_layer = model.transformer.h[-1]
+            last_layer_state = last_layer.state_dict()
+            
+            # Create new last layer with LoRA config
+            last_layer_config = GPTConfig(**{k: v for k, v in config.__dict__.items()})
+            last_layer_config.add_lora = True
+            new_last_layer = Block(last_layer_config)
+            
+            # Restore the weights to the new layer
+            new_last_layer.load_state_dict(last_layer_state, strict=False)  # strict=False to allow extra LoRA params
+            
+            # Replace the last layer
+            model.transformer.h[-1] = new_last_layer
+
         return model
 
     def configure_optimizers(self, weight_decay, learning_rate, betas, device_type):
-        # start with all of the candidate parameters
-        param_dict = {pn: p for pn, p in self.named_parameters()}
-        # filter out those that do not require grad
-        param_dict = {pn: p for pn, p in param_dict.items() if p.requires_grad}
-        # create optim groups. Any parameters that is 2D will be weight decayed, otherwise no.
-        # i.e. all weight tensors in matmuls + embeddings decay, all biases and layernorms don't.
-        decay_params = [p for n, p in param_dict.items() if p.dim() >= 2]
-        nodecay_params = [p for n, p in param_dict.items() if p.dim() < 2]
-        optim_groups = [
-            {'params': decay_params, 'weight_decay': weight_decay},
-            {'params': nodecay_params, 'weight_decay': 0.0}
-        ]
-        num_decay_params = sum(p.numel() for p in decay_params)
-        num_nodecay_params = sum(p.numel() for p in nodecay_params)
-        print(f"num decayed parameter tensors: {len(decay_params)}, with {num_decay_params:,} parameters")
-        print(f"num non-decayed parameter tensors: {len(nodecay_params)}, with {num_nodecay_params:,} parameters")
-        # Create AdamW optimizer and use the fused version if it is available
-        fused_available = 'fused' in inspect.signature(torch.optim.AdamW).parameters
-        use_fused = fused_available and device_type == 'cuda'
-        extra_args = dict(fused=True) if use_fused else dict()
-        optimizer = torch.optim.AdamW(optim_groups, lr=learning_rate, betas=betas, **extra_args)
-        print(f"using fused AdamW: {use_fused}")
+        # Check if we're using LoRA
+        if self.config.add_lora:
+            # Get only LoRA parameters (A and B matrices)
+            lora_params = []
+            for name, param in self.named_parameters():
+                if 'lora_A' in name or 'lora_B' in name:
+                    param.requires_grad = True
+                    lora_params.append(param)
+                else:
+                    param.requires_grad = False
+            
+            print(f"Training only LoRA parameters: {sum(p.numel() for p in lora_params):,} parameters")
+            
+            # Create optimizer with only LoRA parameters - no weight decay
+            fused_available = 'fused' in inspect.signature(torch.optim.AdamW).parameters
+            use_fused = fused_available and device_type == 'cuda'
+            extra_args = dict(fused=True) if use_fused else dict()
+            optimizer = torch.optim.AdamW(lora_params, lr=learning_rate, betas=betas, weight_decay=0.0, **extra_args)
+            
+        elif self.config.is_moe:
+            # Freeze all parameters
+            for param in self.parameters():
+                param.requires_grad = False
+                
+            # Unfreeze only router parameters
+            for router in self.transformer.routers:
+                for param in router.parameters():
+                    param.requires_grad = True
+            
+            # Get only router parameters that require gradients
+            params = [p for p in self.parameters() if p.requires_grad]
+            
+            print(f"Training only router parameters: {sum(p.numel() for p in params):,} parameters")
+            
+            # Create optimizer with only router parameters - no weight decay
+            fused_available = 'fused' in inspect.signature(torch.optim.AdamW).parameters
+            use_fused = fused_available and device_type == 'cuda'
+            extra_args = dict(fused=True) if use_fused else dict()
+            optimizer = torch.optim.AdamW(params, lr=learning_rate, betas=betas, weight_decay=0.0, **extra_args)
+            print(f"using fused AdamW: {use_fused}")
+            
+        else:
+            # Original optimizer configuration for non-MoE model
+            param_dict = {pn: p for pn, p in self.named_parameters()}
+            param_dict = {pn: p for pn, p in param_dict.items() if p.requires_grad}
+            decay_params = [p for n, p in param_dict.items() if p.dim() >= 2]
+            nodecay_params = [p for n, p in param_dict.items() if p.dim() < 2]
+            optim_groups = [
+                {'params': decay_params, 'weight_decay': weight_decay},
+                {'params': nodecay_params, 'weight_decay': 0.0}
+            ]
+            num_decay_params = sum(p.numel() for p in decay_params)
+            num_nodecay_params = sum(p.numel() for p in nodecay_params)
+            print(f"num decayed parameter tensors: {len(decay_params)}, with {num_decay_params:,} parameters")
+            print(f"num non-decayed parameter tensors: {len(nodecay_params)}, with {num_nodecay_params:,} parameters")
+            fused_available = 'fused' in inspect.signature(torch.optim.AdamW).parameters
+            use_fused = fused_available and device_type == 'cuda'
+            extra_args = dict(fused=True) if use_fused else dict()
+            optimizer = torch.optim.AdamW(optim_groups, lr=learning_rate, betas=betas, **extra_args)
+            print(f"using fused AdamW: {use_fused}")
 
         return optimizer
 

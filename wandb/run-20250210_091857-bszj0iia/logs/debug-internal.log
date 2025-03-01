@@ -1,0 +1,16 @@
+{"time":"2025-02-10T09:18:57.969170047-05:00","level":"INFO","msg":"using version","core version":"0.18.7"}
+{"time":"2025-02-10T09:18:57.969183467-05:00","level":"INFO","msg":"created symlink","path":"/data/pulkitag/models/jyop/code/nanoGPT/wandb/run-20250210_091857-bszj0iia/logs/debug-core.log"}
+{"time":"2025-02-10T09:18:58.090249844-05:00","level":"INFO","msg":"created new stream","id":"bszj0iia"}
+{"time":"2025-02-10T09:18:58.090330863-05:00","level":"INFO","msg":"stream: started","id":"bszj0iia"}
+{"time":"2025-02-10T09:18:58.09290742-05:00","level":"INFO","msg":"handler: started","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:18:58.09297658-05:00","level":"INFO","msg":"writer: Do: started","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:18:58.093133359-05:00","level":"INFO","msg":"sender: started","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:18:58.285862734-05:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-02-10T09:20:14.213777381-05:00","level":"INFO","msg":"stream: closing","id":"bszj0iia"}
+{"time":"2025-02-10T09:20:15.446064021-05:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-02-10T09:20:15.44717976-05:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-02-10T09:20:15.808101925-05:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-02-10T09:20:15.921199123-05:00","level":"INFO","msg":"handler: closed","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:20:15.921249453-05:00","level":"INFO","msg":"writer: Close: closed","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:20:15.921508633-05:00","level":"INFO","msg":"sender: closed","stream_id":"bszj0iia"}
+{"time":"2025-02-10T09:20:15.922650501-05:00","level":"INFO","msg":"stream: closed","id":"bszj0iia"}
